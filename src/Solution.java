@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Solution {
 
@@ -85,6 +86,7 @@ public class Solution {
                     cur = l1;
                     l1 = l1.next;
                 }
+                //ret.printList();
             } else {
                 //pick from l2
                 if (ret == null) {
@@ -96,10 +98,40 @@ public class Solution {
                     cur = l2;
                     l2 = l2.next;
                 }
+                //ret.printList();
             }
         }
         return ret;
     }
 
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+
+        char[] arr = s.toCharArray();
+        for (char c : arr) {
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } else if (c == ')') {
+                if (stack.size() ==0 || stack.pop() != '('){
+                    return false;
+                }
+            }  else if (c == '}') {
+                if (stack.size() ==0 || stack.pop() != '{'){
+                    return false;
+                }
+            }  else if (c == ']') {
+                if (stack.size() ==0 || stack.pop() != '['){
+                    return false;
+                }
+            } else {
+                return false;
+            }
+
+        }
+        return stack.size()==0;    }
+
+    public int climbStairs(int n) {
+        return 0;
+    }
 }
 

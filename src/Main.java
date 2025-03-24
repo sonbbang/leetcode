@@ -27,6 +27,12 @@ public class Main {
         ListNode listNode = solution.mergeTwoLists(list1, list2);
         listNode.printList();
 
+        //https://leetcode.com/problems/valid-parentheses/description
+        System.out.println("isValid:" + solution.isValid("(()"));
+
+        //https://leetcode.com/problems/climbing-stairs
+        System.out.println("isValid:" + solution.climbStairs(3));
+
     }
 
 

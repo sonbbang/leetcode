@@ -18,7 +18,7 @@ public class ListNode {
     public void printList() {
         ListNode current = this; // 현재 노드부터 시작
         while (current != null) {
-            System.out.print(current.val + " "); // 현재 노드의 값 출력
+            System.out.print(current.val + "->"); // 현재 노드의 값 출력
             current = current.next; // 다음 노드로 이동
         }
         System.out.println(); // 출력 후 새로운 줄로 넘어감
