@@ -6,6 +6,8 @@ public class Solution {
 
     ArrayList<String> ret = new ArrayList<>();
 
+    //backtracking
+    //~recursion+ termination check
     public List<String> generateParenthesis(int n) {
 
         List<String> ret = new ArrayList<>();
@@ -39,6 +41,11 @@ public class Solution {
     int min;
     int prev;
 
+    //트리 순회(재귀)
+    //preorder : self left right
+    //inorder : left self right
+    //postorder : left right self
+    //이진검색트리 성질 -> inorder -> 오름차순 정렬이 됨!
     public int getMinimumDifference(TreeNode root) {
         init = false;
         min = Integer.MAX_VALUE;
@@ -112,15 +119,15 @@ public class Solution {
             if (c == '(' || c == '{' || c == '[') {
                 stack.push(c);
             } else if (c == ')') {
-                if (stack.size() ==0 || stack.pop() != '('){
+                if (stack.size() == 0 || stack.pop() != '(') {
                     return false;
                 }
-            }  else if (c == '}') {
-                if (stack.size() ==0 || stack.pop() != '{'){
+            } else if (c == '}') {
+                if (stack.size() == 0 || stack.pop() != '{') {
                     return false;
                 }
-            }  else if (c == ']') {
-                if (stack.size() ==0 || stack.pop() != '['){
+            } else if (c == ']') {
+                if (stack.size() == 0 || stack.pop() != '[') {
                     return false;
                 }
             } else {
@@ -128,10 +135,47 @@ public class Solution {
             }
 
         }
-        return stack.size()==0;    }
+        return stack.size() == 0;
+    }
 
+    //1 2 3 5 8: 피보나치 수열
+    //f(n)=f(n-1)+f(n-2)
+    //f(5)=f(4)+f(3)
+    //f(4)=f(3)+f(2)
+    //다이나믹 프로그래밍 -> 공간복잡도 O(n) 시간복잡고 O(n)
+    //점화식을 찾아야한다.
     public int climbStairs(int n) {
-        return 0;
+        if (n <= 0) return 0;
+        if (n == 1) return 1;
+
+        int[] d = new int[n + 1];
+        d[1] = 1;
+        d[2] = 2;
+        for (int i = 3; i < n; i++) {
+            d[i] = d[i - 1] + d[i - 2];
+        }
+        return d[n];
+    }
+
+    /*
+    pre : self children
+    post: children self
+     */
+    public List<Integer> preorder(Node root) {
+        List<Integer> ret = new ArrayList<>();
+        traverse(root, ret);
+        return ret;
+    }
+
+    private void traverse(Node root, List<Integer> ret) {
+        if (root == null) return;
+        ret.add(root.val);
+
+        if (root.children != null) {
+            for (Node child : root.children) {
+                traverse(child, ret);
+            }
+        }
     }
 }
 

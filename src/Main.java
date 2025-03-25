@@ -33,6 +33,16 @@ public class Main {
         //https://leetcode.com/problems/climbing-stairs
         System.out.println("isValid:" + solution.climbStairs(3));
 
+        //https://leetcode.com/problems/n-ary-tree-preorder-traversal
+        Node child1 = new Node(1, null);
+        Node child2 = new Node(2, null);
+        ArrayList<Node> childs = new ArrayList<>();
+        childs.add(child1);
+        childs.add(child2);
+
+        Node rootNode = new Node(3, childs);
+        System.out.println("preorder:" + solution.preorder(rootNode));
+
     }
 
 
