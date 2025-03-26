@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class Solution {
 
@@ -142,7 +140,7 @@ public class Solution {
     //f(n)=f(n-1)+f(n-2)
     //f(5)=f(4)+f(3)
     //f(4)=f(3)+f(2)
-    //다이나믹 프로그래밍 -> 공간복잡도 O(n) 시간복잡고 O(n)
+    //다이나믹 프로그래밍 -> 공간복잡도 O(n) 시간복잡도 O(n)
     //점화식을 찾아야한다.
     public int climbStairs(int n) {
         if (n <= 0) return 0;
@@ -176,6 +174,62 @@ public class Solution {
                 traverse(child, ret);
             }
         }
+    }
+
+    //워커 러너 테크닉
+    //walker : 한번에 한칸씩
+    //runner : 한번에 두칸씩
+    //runner가 끝나면 walker는 중간에 와있음
+    //구현을 위한 브레인 스토밍
+    //walker: 1 2x
+    //runner: 1 2 nullx
+    //
+    //walker: 1 2x 3
+    //runner: 1 2 3 nullx
+    //while loop 마다
+    //러너 1칸 전진 웤커 1칸 전진 러너 1칸 전진
+    public ListNode middleNode(ListNode head) {
+        ListNode walker = head;
+        ListNode runner = head;
+        while (runner != null) {
+            runner = runner.next;
+            if (runner != null) {
+                walker = walker.next;
+                runner = runner.next;
+            }
+        }
+        return walker;
+    }
+
+    /*
+    시간복잡도 <-> 공간복잡도
+    대안 1. brute-force 모든 조합을 시도. 2중 루프 n*(n-1) / 2
+        - 시간:O(n^2)
+        - 공간:O(1)
+    대안 2. 해쉬맵 사용, 루프 1개 돌면서 이미 봤던 값을 해쉬맵에 넣음
+        - 시간: O(n)
+        - 공간: O(n)
+     */
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();//키-값, 밸류-인덱스
+
+        for (int i = 0; i < nums.length; i++) {
+            int cur = nums[i];
+            if (map.containsKey(target - cur)) {
+                int[] ret = new int[2];
+                ret[0] = map.get(target - cur);
+                ret[1] = i;
+                return ret;
+            } else {
+                map.put(cur, i);
+            }
+        }
+        return null;
+
+    }
+
+    public int singleNumber(int[] nums) {
+        return 0;
     }
 }
 

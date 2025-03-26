@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -31,19 +32,38 @@ public class Main {
         System.out.println("isValid:" + solution.isValid("(()"));
 
         //https://leetcode.com/problems/climbing-stairs
-        System.out.println("isValid:" + solution.climbStairs(3));
+        System.out.println("climbStairs:" + solution.climbStairs(3));
 
         //https://leetcode.com/problems/n-ary-tree-preorder-traversal
-        Node child1 = new Node(1, null);
-        Node child2 = new Node(2, null);
-        ArrayList<Node> childs = new ArrayList<>();
-        childs.add(child1);
-        childs.add(child2);
+        Node child5 = new Node(5, null);
+        Node child6 = new Node(6, null);
 
-        Node rootNode = new Node(3, childs);
+        Node child3 = new Node(3, Arrays.asList(child5, child6));
+        Node child2 = new Node(2, null);
+        Node child4 = new Node(4, null);
+
+        Node rootNode = new Node(1, Arrays.asList(child3, child2, child4));
         System.out.println("preorder:" + solution.preorder(rootNode));
 
+        //https://leetcode.com/problems/middle-of-the-linked-list
+        ListNode head4 = new ListNode(4);
+        ListNode head3 = new ListNode(3, head4);
+        ListNode head2 = new ListNode(2, head3);
+        ListNode head1 = new ListNode(1, head2);
+        System.out.println("middleNode:" + solution.middleNode(head1).val);
+
+        //https://leetcode.com/problems/two-sum
+        int[] nums = {2, 7, 11, 15};
+        int target = 9;
+        int[] ret = solution.twoSum(nums, target);
+        System.out.println("twoSum:" + ret[0] + "," + ret[1]);
+
+        https://leetcode.com/problems/single-number
+        nums = new int[]{2, 2, 1};
+        System.out.println("singleNumber:" + solution.singleNumber(nums));
     }
+
+
 
 
 }
