@@ -15,13 +15,17 @@ public class ListNode {
     }
 
     // 리스트의 모든 값을 출력하는 메소드
-    public void printList() {
+    public String printList() {
+        String ret = "";
         ListNode current = this; // 현재 노드부터 시작
         while (current != null) {
-            System.out.print(current.val + "->"); // 현재 노드의 값 출력
+            ret += current.val;
+            if (current.next != null) {
+                ret += "->"; // 다음 노드가 있으면 '->' 추가
+            }
             current = current.next; // 다음 노드로 이동
         }
-        System.out.println(); // 출력 후 새로운 줄로 넘어감
+        return ret;
     }
 
 }

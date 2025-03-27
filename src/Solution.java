@@ -7,7 +7,6 @@ public class Solution {
     //backtracking
     //~recursion+ termination check
     public List<String> generateParenthesis(int n) {
-
         List<String> ret = new ArrayList<>();
         process(n, 0, 0, "", ret); //recurse;
         return ret;
@@ -15,16 +14,13 @@ public class Solution {
 
     //numClosed > numOpen -> invalid
     private void process(int n, int numOpen, int numClosed, String str, List<String> ret) {
-
         //System.out.println("numOpen: " + numOpen + " numClosed: " + numClosed);
-
         //termination check
         if (numOpen == n && numClosed == n) {
             //System.out.println("str: " + str);
             ret.add(str);
             return;
         }
-
         //recurse next
         if (numOpen < n) {
             process(n, numOpen + 1, numClosed, str + "(", ret); //add open bracket
@@ -149,7 +145,7 @@ public class Solution {
         int[] d = new int[n + 1];
         d[1] = 1;
         d[2] = 2;
-        for (int i = 3; i < n; i++) {
+        for (int i = 3; i <= n; i++) {
             d[i] = d[i - 1] + d[i - 2];
         }
         return d[n];
@@ -228,8 +224,51 @@ public class Solution {
 
     }
 
+    //XOR
+    //n ^ n = 0
     public int singleNumber(int[] nums) {
-        return 0;
+        int ret = 0;
+        for (int num : nums) {
+            ret ^= num;
+        }
+        return ret;
+    }
+
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> ret = new ArrayList<>();
+        if (root == null) return ret;
+
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+            List<Integer> level = new ArrayList<>();
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = q.poll();
+                level.add(node.val);
+                if (node.left != null) q.offer(node.left);
+                if (node.right != null) q.offer(node.right);
+            }
+            ret.add(0, level);
+        }
+        return ret;
+    }
+
+    List<Integer> ret2;
+
+    public List<Integer> inorderTraversal(TreeNode root) {
+        ret2 = new ArrayList<>();
+        traverse2(root);
+        return ret2;
+    }
+
+    private void traverse2(TreeNode self) {
+        if (self == null) return;
+        traverse2(self.left);
+        ret2.add(self.val);
+        traverse2(self.right);
+
     }
 }
 
