@@ -112,7 +112,9 @@ public class Main {
         root = new TreeNode(1, null, middle);       // 최상위 노드
         System.out.println("12.inorderTraversal:" + solution.inorderTraversal(root));
 
+
     }
+
 
 
 }
